@@ -8,7 +8,7 @@
     :root {
       --accent: #b71c1c;
       --accent-soft: #ffebee;
-      --card-bg: rgba(255, 255, 255, 0.95);
+      --card-bg: rgba(255, 255, 255, 0.96);
       --shadow-soft: 0 8px 25px rgba(0, 0, 0, 0.18);
       --text-main: #212121;
       --text-muted: #555;
@@ -28,8 +28,7 @@
       position: relative;
     }
 
-    /* Synge Street crest watermark.
-       👉 In this repo, upload your crest as "crest.png" beside index.html */
+    /* Synge Street crest watermark – keep crest.png beside index.html */
     body::before {
       content: "";
       position: fixed;
@@ -38,7 +37,7 @@
       background-repeat: no-repeat;
       background-position: center;
       background-size: 45vmin;
-      opacity: 0.3;         /* fairly strong */
+      opacity: 0.32;         /* strong, visible identity */
       pointer-events: none;
       z-index: -2;
     }
@@ -65,11 +64,12 @@
     .hub {
       max-width: 1100px;
       margin: 24px auto;
-      padding: 16px 20px 20px;
-      background: rgba(255, 255, 255, 0.3); /* mostly transparent so crest shows */
+      padding: 14px 18px 18px;
+      background: rgba(255, 255, 255, 0.12);  /* almost transparent */
       border-radius: 20px;
       box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
     }
 
     .hub-header {
@@ -143,31 +143,14 @@
       background: linear-gradient(135deg, #f5f5f5, #eceff1);
     }
 
-    /* different “image”/icon vibes per game */
-    .hero-hayloween {
-      background: radial-gradient(circle at top, #ffcc80, #4e342e);
-    }
-    .hero-months {
-      background: linear-gradient(135deg, #fff3e0, #ffe082);
-    }
-    .hero-transport {
-      background: linear-gradient(135deg, #e3f2fd, #90caf9);
-    }
-    .hero-days-subjects {
-      background: linear-gradient(135deg, #ede7f6, #b39ddb);
-    }
-    .hero-tener-estar {
-      background: linear-gradient(135deg, #fce4ec, #f48fb1);
-    }
-    .hero-turbo-beginner {
-      background: linear-gradient(135deg, #e8f5e9, #a5d6a7);
-    }
-    .hero-turbo-daily {
-      background: linear-gradient(135deg, #f3e5f5, #ce93d8);
-    }
-    .hero-ketchup {
-      background: radial-gradient(circle at top, #ffeb3b, #b71c1c);
-    }
+    .hero-hayloween      { background: radial-gradient(circle at top, #ffcc80, #4e342e); }
+    .hero-months         { background: linear-gradient(135deg, #fff3e0, #ffe082); }
+    .hero-transport      { background: linear-gradient(135deg, #e3f2fd, #90caf9); }
+    .hero-days-subjects  { background: linear-gradient(135deg, #ede7f6, #b39ddb); }
+    .hero-tener-estar    { background: linear-gradient(135deg, #fce4ec, #f48fb1); }
+    .hero-turbo-beginner { background: linear-gradient(135deg, #e8f5e9, #a5d6a7); }
+    .hero-turbo-daily    { background: linear-gradient(135deg, #f3e5f5, #ce93d8); }
+    .hero-ketchup        { background: radial-gradient(circle at top, #ffeb3b, #b71c1c); }
 
     .game-card h2 {
       margin: 0 0 4px;
@@ -241,7 +224,7 @@
         <div class="card-hero hero-hayloween">🎃</div>
         <h2>Hayloween</h2>
         <p>Spooky Spanish vocab and phrases.</p>
-        <span class="progress-badge">Progress not tracked</span>
+        <span class="progress-badge" id="hayloweenProgress">Not started yet</span>
         <div class="play-chip"><span>Play</span> ➜</div>
       </a>
 
@@ -250,7 +233,7 @@
         <div class="card-hero hero-months">📅</div>
         <h2>Months &amp; Numbers</h2>
         <p>Practise months of the year and numbers.</p>
-        <span class="progress-badge">Progress not tracked</span>
+        <span class="progress-badge" id="monthsProgress">Not started yet</span>
         <div class="play-chip"><span>Play</span> ➜</div>
       </a>
 
@@ -259,7 +242,7 @@
         <div class="card-hero hero-transport">🚍</div>
         <h2>Transport</h2>
         <p>Travel and transport vocabulary.</p>
-        <span class="progress-badge">Progress not tracked</span>
+        <span class="progress-badge" id="transportProgress">Not started yet</span>
         <div class="play-chip"><span>Play</span> ➜</div>
       </a>
 
@@ -268,7 +251,7 @@
         <div class="card-hero hero-days-subjects">📚</div>
         <h2>Days &amp; Subjects</h2>
         <p>Timetable talk: days of the week and school subjects.</p>
-        <span class="progress-badge">Progress not tracked</span>
+        <span class="progress-badge" id="daysSubjectsProgress">Not started yet</span>
         <div class="play-chip"><span>Play</span> ➜</div>
       </a>
 
@@ -277,7 +260,7 @@
         <div class="card-hero hero-tener-estar">🔁</div>
         <h2>Tener &amp; Estar</h2>
         <p>Two key verbs from class all term.</p>
-        <span class="progress-badge">Progress not tracked</span>
+        <span class="progress-badge" id="tenerEstarProgress">Not started yet</span>
         <div class="play-chip"><span>Play</span> ➜</div>
       </a>
 
@@ -286,7 +269,7 @@
         <div class="card-hero hero-turbo-beginner">🚀</div>
         <h2>Turbo Beginner</h2>
         <p>Fast-paced beginner drills with a timer.</p>
-        <span class="progress-badge">Progress not tracked</span>
+        <span class="progress-badge" id="turboBeginnerProgress">Not started yet</span>
         <div class="play-chip"><span>Play</span> ➜</div>
       </a>
 
@@ -295,7 +278,7 @@
         <div class="card-hero hero-turbo-daily">⚡</div>
         <h2>Turbo Daily (sample)</h2>
         <p>Quick-fire daily Spanish practice.</p>
-        <span class="progress-badge">Progress not tracked</span>
+        <span class="progress-badge" id="turboDailyProgress">Not started yet</span>
         <div class="play-chip"><span>Play</span> ➜</div>
       </a>
 
@@ -304,7 +287,7 @@
         <div class="card-hero hero-ketchup">🎄</div>
         <h2>TURBO: KETCHUP</h2>
         <p>Christmas colours &amp; characters with ser, estar &amp; tener.</p>
-        <span class="progress-badge" id="ketchupProgress">Loading progress…</span>
+        <span class="progress-badge" id="ketchupProgress">Not started yet</span>
         <div class="play-chip"><span>Play</span> ➜</div>
       </a>
 
@@ -316,16 +299,16 @@
   </main>
 
   <script>
-    // Read Turbo Ketchup progress from this browser (shared origin)
-    document.addEventListener("DOMContentLoaded", () => {
-      const badge = document.getElementById("ketchupProgress");
+    // Generic function to read and display progress for any game
+    function updateBadge(badgeId, storageKey) {
+      const badge = document.getElementById(badgeId);
       if (!badge) return;
 
       let data = null;
       try {
-        data = JSON.parse(localStorage.getItem("turbo_ketchup_progress") || "null");
+        data = JSON.parse(localStorage.getItem(storageKey) || "null");
       } catch (e) {
-        console.warn("Could not read turbo_ketchup_progress", e);
+        console.warn("Could not read", storageKey, e);
       }
 
       if (!data) {
@@ -333,15 +316,30 @@
         return;
       }
 
-      const levels = data.levelsCompleted ?? 0;
       const bestScore = data.bestScore ?? 0;
       const bestTime =
         typeof data.bestTime === "number" ? data.bestTime.toFixed(1) + "s" : "—";
 
-      badge.textContent =
-        `Levels ${levels}/10 · Best ${bestScore}% · Best time ${bestTime}`;
+      // If a game uses levelsCompleted, show it. Otherwise just score/time.
+      if (typeof data.levelsCompleted === "number") {
+        badge.textContent =
+          `Levels ${data.levelsCompleted}${data.totalLevels ? "/" + data.totalLevels : ""}` +
+          ` · Best ${bestScore}% · ${bestTime}`;
+      } else {
+        badge.textContent = `Best ${bestScore}% · ${bestTime}`;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      updateBadge("hayloweenProgress",      "turbo_hayloween_progress");
+      updateBadge("monthsProgress",         "turbo_months_numbers_progress");
+      updateBadge("transportProgress",      "turbo_transport_progress");
+      updateBadge("daysSubjectsProgress",   "turbo_days_subjects_progress");
+      updateBadge("tenerEstarProgress",     "turbo_tener_estar_progress");
+      updateBadge("turboBeginnerProgress",  "turbo_beginner_progress");
+      updateBadge("turboDailyProgress",     "turbo_daily_sample_progress");
+      updateBadge("ketchupProgress",        "turbo_ketchup_progress");
     });
   </script>
 </body>
 </html>
-
