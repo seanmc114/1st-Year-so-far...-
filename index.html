@@ -6,12 +6,14 @@
 
   <style>
     :root {
-      --accent: #c62828;
+      --accent: #b71c1c;
       --accent-soft: #ffebee;
-      --card-bg: rgba(255, 255, 255, 0.96);
+      --card-bg: rgba(255, 255, 255, 0.95);
       --shadow-soft: 0 8px 25px rgba(0, 0, 0, 0.18);
       --text-main: #212121;
       --text-muted: #555;
+      --evergreen: #1b5e20;
+      --gold: #ffb300;
     }
 
     * { box-sizing: border-box; }
@@ -21,11 +23,13 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text-main);
       min-height: 100vh;
-      background: radial-gradient(circle at top, #fef3e0 0, #e3f2fd 55%, #e0f7fa 100%);
+      background:
+        radial-gradient(circle at top, #fbe9e7 0, #e3f2fd 45%, #e0f7fa 100%);
       position: relative;
     }
 
-    /* Crest watermark (using the crest you uploaded) */
+    /* Synge Street crest watermark.
+       👉 In this repo, upload your crest as "crest.png" beside index.html */
     body::before {
       content: "";
       position: fixed;
@@ -33,12 +37,13 @@
       background-image: url("crest.png");
       background-repeat: no-repeat;
       background-position: center;
-      background-size: 55vmin;
-      opacity: 0.22;
+      background-size: 45vmin;
+      opacity: 0.3;         /* fairly strong */
       pointer-events: none;
       z-index: -2;
     }
 
+    /* soft snow overlay */
     .snow-overlay {
       pointer-events: none;
       position: fixed;
@@ -60,26 +65,38 @@
     .hub {
       max-width: 1100px;
       margin: 24px auto;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.94);
+      padding: 16px 20px 20px;
+      background: rgba(255, 255, 255, 0.3); /* mostly transparent so crest shows */
       border-radius: 20px;
       box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(4px);
     }
 
-    .hub-header { text-align: center; margin-bottom: 18px; }
+    .hub-header {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
     .hub-header h1 {
       margin: 0;
-      font-size: 2.6rem;
+      font-size: 2.5rem;
       color: var(--accent);
-      text-shadow: 0 0 12px rgba(255,255,255,0.9);
+      text-shadow: 0 0 10px rgba(255,255,255,0.9);
     }
 
-    .tagline { margin: 6px 0 4px; font-size: 0.98rem; }
-    .hint { margin: 0; font-size: 0.9rem; color: var(--text-muted); }
+    .tagline {
+      margin: 6px 0 4px;
+      font-size: 1rem;
+    }
+
+    .hint {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
 
     .games-grid {
-      margin-top: 18px;
+      margin-top: 16px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 14px;
@@ -88,31 +105,79 @@
     .game-card {
       display: flex;
       flex-direction: column;
-      padding: 14px;
+      padding: 12px 14px 12px;
       border-radius: 18px;
       background: var(--card-bg);
       text-decoration: none;
       color: inherit;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-      border: 1px solid rgba(0,0,0,0.1);
-      transition: 0.12s;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      transition:
+        transform 0.12s ease-out,
+        box-shadow 0.12s ease-out,
+        border-color 0.12s;
     }
 
     .game-card.special {
-      border-color: var(--accent);
-      background: linear-gradient(135deg,
-        rgba(198,40,40,0.06),
-        rgba(255,255,255,0.96)
-      );
+      border-color: var(--gold);
+      background:
+        linear-gradient(135deg,
+          rgba(183,28,28,0.08),
+          rgba(255,255,255,0.98));
     }
 
     .game-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+      border-color: rgba(0, 0, 0, 0.16);
     }
 
-    .game-card h2 { margin: 0 0 6px; font-size: 1.1rem; }
-    .game-card p { margin: 2px 0; font-size: 0.9rem; }
+    .card-hero {
+      height: 80px;
+      border-radius: 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      background: linear-gradient(135deg, #f5f5f5, #eceff1);
+    }
+
+    /* different “image”/icon vibes per game */
+    .hero-hayloween {
+      background: radial-gradient(circle at top, #ffcc80, #4e342e);
+    }
+    .hero-months {
+      background: linear-gradient(135deg, #fff3e0, #ffe082);
+    }
+    .hero-transport {
+      background: linear-gradient(135deg, #e3f2fd, #90caf9);
+    }
+    .hero-days-subjects {
+      background: linear-gradient(135deg, #ede7f6, #b39ddb);
+    }
+    .hero-tener-estar {
+      background: linear-gradient(135deg, #fce4ec, #f48fb1);
+    }
+    .hero-turbo-beginner {
+      background: linear-gradient(135deg, #e8f5e9, #a5d6a7);
+    }
+    .hero-turbo-daily {
+      background: linear-gradient(135deg, #f3e5f5, #ce93d8);
+    }
+    .hero-ketchup {
+      background: radial-gradient(circle at top, #ffeb3b, #b71c1c);
+    }
+
+    .game-card h2 {
+      margin: 0 0 4px;
+      font-size: 1.1rem;
+    }
+
+    .game-card p {
+      margin: 2px 0;
+      font-size: 0.9rem;
+    }
 
     .progress-badge {
       margin-top: 8px;
@@ -125,19 +190,36 @@
     }
 
     .play-chip {
-      margin-top: 8px;
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       padding: 4px 10px;
-      background: #eee;
       border-radius: 999px;
+      background: #eeeeee;
       font-size: 0.8rem;
       width: fit-content;
     }
 
+    .play-chip span {
+      font-size: 0.9rem;
+    }
+
     .hub-footer {
-      margin-top: 18px;
+      margin-top: 16px;
       text-align: center;
       font-size: 0.8rem;
       color: var(--text-muted);
+    }
+
+    @media (max-width: 600px) {
+      .hub {
+        margin: 10px;
+        padding: 10px 12px 14px;
+      }
+      .hub-header h1 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
@@ -148,62 +230,103 @@
   <main class="hub">
     <header class="hub-header">
       <h1>1st Year (so far...)</h1>
-      <p class="tagline">Christmas revision hub for Synge Street 1st Year Spanish.</p>
-      <p class="hint">Click a card to launch a game. Progress is saved automatically.</p>
+      <p class="tagline">Christmas revision hub – Synge Street 1st Year Spanish.</p>
+      <p class="hint">Click a tile to open a game in a new tab. Progress stays on this device.</p>
     </header>
 
     <section class="games-grid">
 
+      <!-- Hayloween -->
       <a class="game-card" href="https://seanmc114.github.io/Hayloween/" target="_blank">
-        <h2>Hayloween 🎃</h2>
-        <p>Spooky vocab and phrases.</p>
+        <div class="card-hero hero-hayloween">🎃</div>
+        <h2>Hayloween</h2>
+        <p>Spooky Spanish vocab and phrases.</p>
         <span class="progress-badge">Progress not tracked</span>
-        <span class="play-chip">Play ➜</span>
+        <div class="play-chip"><span>Play</span> ➜</div>
       </a>
 
+      <!-- Months & Numbers -->
       <a class="game-card" href="https://seanmc114.github.io/Months-and-Numbers/" target="_blank">
-        <h2>Months & Numbers 📅➕</h2>
-        <p>Months and counting practice.</p>
+        <div class="card-hero hero-months">📅</div>
+        <h2>Months &amp; Numbers</h2>
+        <p>Practise months of the year and numbers.</p>
         <span class="progress-badge">Progress not tracked</span>
-        <span class="play-chip">Play ➜</span>
+        <div class="play-chip"><span>Play</span> ➜</div>
       </a>
 
+      <!-- Transport -->
       <a class="game-card" href="https://seanmc114.github.io/Transport/" target="_blank">
-        <h2>Transport 🚍</h2>
-        <p>Travel vocabulary.</p>
+        <div class="card-hero hero-transport">🚍</div>
+        <h2>Transport</h2>
+        <p>Travel and transport vocabulary.</p>
         <span class="progress-badge">Progress not tracked</span>
-        <span class="play-chip">Play ➜</span>
+        <div class="play-chip"><span>Play</span> ➜</div>
       </a>
 
+      <!-- Days & Subjects -->
+      <a class="game-card" href="https://seanmc114.github.io/Days-and-Subjects/" target="_blank">
+        <div class="card-hero hero-days-subjects">📚</div>
+        <h2>Days &amp; Subjects</h2>
+        <p>Timetable talk: days of the week and school subjects.</p>
+        <span class="progress-badge">Progress not tracked</span>
+        <div class="play-chip"><span>Play</span> ➜</div>
+      </a>
+
+      <!-- Tener & Estar -->
+      <a class="game-card" href="https://seanmc114.github.io/Tener-Estar/" target="_blank">
+        <div class="card-hero hero-tener-estar">🔁</div>
+        <h2>Tener &amp; Estar</h2>
+        <p>Two key verbs from class all term.</p>
+        <span class="progress-badge">Progress not tracked</span>
+        <div class="play-chip"><span>Play</span> ➜</div>
+      </a>
+
+      <!-- Turbo Beginner -->
       <a class="game-card" href="https://seanmc114.github.io/Turbo-Beginner/" target="_blank">
-        <h2>Turbo Beginner 🚀</h2>
-        <p>Super-fast Spanish basics.</p>
+        <div class="card-hero hero-turbo-beginner">🚀</div>
+        <h2>Turbo Beginner</h2>
+        <p>Fast-paced beginner drills with a timer.</p>
         <span class="progress-badge">Progress not tracked</span>
-        <span class="play-chip">Play ➜</span>
+        <div class="play-chip"><span>Play</span> ➜</div>
       </a>
 
+      <!-- Turbo Daily Sample -->
+      <a class="game-card" href="https://seanmc114.github.io/Turbo-daily-sample/" target="_blank">
+        <div class="card-hero hero-turbo-daily">⚡</div>
+        <h2>Turbo Daily (sample)</h2>
+        <p>Quick-fire daily Spanish practice.</p>
+        <span class="progress-badge">Progress not tracked</span>
+        <div class="play-chip"><span>Play</span> ➜</div>
+      </a>
+
+      <!-- TURBO: KETCHUP -->
       <a class="game-card special" href="https://seanmc114.github.io/Turbo-Ketchup/" target="_blank">
-        <h2>TURBO: KETCHUP 🎄</h2>
-        <p>Colours & characters with ser, estar & tener.</p>
-        <span class="progress-badge" id="ketchupProgress">Loading…</span>
-        <span class="play-chip">Play ➜</span>
+        <div class="card-hero hero-ketchup">🎄</div>
+        <h2>TURBO: KETCHUP</h2>
+        <p>Christmas colours &amp; characters with ser, estar &amp; tener.</p>
+        <span class="progress-badge" id="ketchupProgress">Loading progress…</span>
+        <div class="play-chip"><span>Play</span> ➜</div>
       </a>
 
     </section>
 
     <footer class="hub-footer">
-      Synge Street · 1st Year Spanish · Christmas Revision
+      Synge Street · 1st Year Spanish · Christmas revision
     </footer>
   </main>
 
   <script>
-    // Read Turbo Ketchup progress
+    // Read Turbo Ketchup progress from this browser (shared origin)
     document.addEventListener("DOMContentLoaded", () => {
       const badge = document.getElementById("ketchupProgress");
+      if (!badge) return;
+
       let data = null;
       try {
-        data = JSON.parse(localStorage.getItem("turbo_ketchup_progress"));
-      } catch {}
+        data = JSON.parse(localStorage.getItem("turbo_ketchup_progress") || "null");
+      } catch (e) {
+        console.warn("Could not read turbo_ketchup_progress", e);
+      }
 
       if (!data) {
         badge.textContent = "Not started yet";
@@ -211,12 +334,14 @@
       }
 
       const levels = data.levelsCompleted ?? 0;
-      const score = data.bestScore ?? 0;
-      const time = data.bestTime ? data.bestTime.toFixed(1) + "s" : "—";
+      const bestScore = data.bestScore ?? 0;
+      const bestTime =
+        typeof data.bestTime === "number" ? data.bestTime.toFixed(1) + "s" : "—";
 
-      badge.textContent = `Levels ${levels}/10 · Best ${score}% · ${time}`;
+      badge.textContent =
+        `Levels ${levels}/10 · Best ${bestScore}% · Best time ${bestTime}`;
     });
   </script>
-
 </body>
 </html>
+
