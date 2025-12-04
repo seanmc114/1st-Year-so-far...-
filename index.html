@@ -1,91 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>1st Year (so far...) – Spanish Games Hub</title>
-  <link rel="stylesheet" href="jump.css">
-  <script defer src="jump.js"></script>
+
+  <style>
+    :root {
+      --accent: #c62828;
+      --accent-soft: #ffebee;
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --shadow-soft: 0 8px 25px rgba(0, 0, 0, 0.18);
+      --text-main: #212121;
+      --text-muted: #555;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #fef3e0 0, #e3f2fd 55%, #e0f7fa 100%);
+      position: relative;
+    }
+
+    /* Crest watermark (using the crest you uploaded) */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("crest.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 55vmin;
+      opacity: 0.22;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .snow-overlay {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.9) 0, transparent 60px),
+        radial-gradient(circle, rgba(255,255,255,0.7) 0, transparent 45px);
+      background-size: 200px 200px, 260px 260px;
+      animation: snowDrift 26s linear infinite;
+      opacity: 0.18;
+      z-index: -1;
+    }
+
+    @keyframes snowDrift {
+      from { transform: translateY(-40px); }
+      to   { transform: translateY(40px); }
+    }
+
+    .hub {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.94);
+      border-radius: 20px;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(6px);
+    }
+
+    .hub-header { text-align: center; margin-bottom: 18px; }
+    .hub-header h1 {
+      margin: 0;
+      font-size: 2.6rem;
+      color: var(--accent);
+      text-shadow: 0 0 12px rgba(255,255,255,0.9);
+    }
+
+    .tagline { margin: 6px 0 4px; font-size: 0.98rem; }
+    .hint { margin: 0; font-size: 0.9rem; color: var(--text-muted); }
+
+    .games-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
+
+    .game-card {
+      display: flex;
+      flex-direction: column;
+      padding: 14px;
+      border-radius: 18px;
+      background: var(--card-bg);
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      border: 1px solid rgba(0,0,0,0.1);
+      transition: 0.12s;
+    }
+
+    .game-card.special {
+      border-color: var(--accent);
+      background: linear-gradient(135deg,
+        rgba(198,40,40,0.06),
+        rgba(255,255,255,0.96)
+      );
+    }
+
+    .game-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+    }
+
+    .game-card h2 { margin: 0 0 6px; font-size: 1.1rem; }
+    .game-card p { margin: 2px 0; font-size: 0.9rem; }
+
+    .progress-badge {
+      margin-top: 8px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #b71c1c;
+      font-size: 0.8rem;
+      align-self: flex-start;
+    }
+
+    .play-chip {
+      margin-top: 8px;
+      padding: 4px 10px;
+      background: #eee;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      width: fit-content;
+    }
+
+    .hub-footer {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+  </style>
 </head>
+
 <body>
   <div class="snow-overlay"></div>
 
   <main class="hub">
     <header class="hub-header">
       <h1>1st Year (so far...)</h1>
-      <p class="tagline">
-        Christmas revision hub for Synge Street 1st Year Spanish.
-      </p>
-      <p class="hint">
-        Click a card to launch a game in a new tab. Progress is saved on this device.
-      </p>
+      <p class="tagline">Christmas revision hub for Synge Street 1st Year Spanish.</p>
+      <p class="hint">Click a card to launch a game. Progress is saved automatically.</p>
     </header>
 
     <section class="games-grid">
-      <!-- Hayloween -->
+
       <a class="game-card" href="https://seanmc114.github.io/Hayloween/" target="_blank">
         <h2>Hayloween 🎃</h2>
-        <p>Spooky Spanish practice with Halloween vocab and phrases.</p>
-        <p class="progress-badge" id="progress-hayloween">
-          Progress: not tracked (yet)
-        </p>
+        <p>Spooky vocab and phrases.</p>
+        <span class="progress-badge">Progress not tracked</span>
+        <span class="play-chip">Play ➜</span>
       </a>
 
-      <!-- Months & Numbers -->
       <a class="game-card" href="https://seanmc114.github.io/Months-and-Numbers/" target="_blank">
         <h2>Months & Numbers 📅➕</h2>
-        <p>Practise months of the year and numbers in Spanish.</p>
-        <p class="progress-badge" id="progress-months">
-          Progress: not tracked (yet)
-        </p>
+        <p>Months and counting practice.</p>
+        <span class="progress-badge">Progress not tracked</span>
+        <span class="play-chip">Play ➜</span>
       </a>
 
-      <!-- Transport -->
       <a class="game-card" href="https://seanmc114.github.io/Transport/" target="_blank">
         <h2>Transport 🚍</h2>
-        <p>Travel and transport vocabulary game.</p>
-        <p class="progress-badge" id="progress-transport">
-          Progress: not tracked (yet)
-        </p>
+        <p>Travel vocabulary.</p>
+        <span class="progress-badge">Progress not tracked</span>
+        <span class="play-chip">Play ➜</span>
       </a>
 
-      <!-- Turbo Beginner -->
       <a class="game-card" href="https://seanmc114.github.io/Turbo-Beginner/" target="_blank">
         <h2>Turbo Beginner 🚀</h2>
-        <p>Fast-paced beginner practice with timed challenges.</p>
-        <p class="progress-badge" id="progress-turbo-beginner">
-          Progress: not tracked (yet)
-        </p>
+        <p>Super-fast Spanish basics.</p>
+        <span class="progress-badge">Progress not tracked</span>
+        <span class="play-chip">Play ➜</span>
       </a>
 
-      <!-- Tener & Estar -->
-      <a class="game-card" href="https://seanmc114.github.io/Tener-y-Estar/" target="_blank">
-        <h2>Tener & Estar 🔁</h2>
-        <p>Practise two essential verbs used all year.</p>
-        <p class="progress-badge" id="progress-tener-estar">
-          Progress: not tracked (yet)
-        </p>
+      <a class="game-card special" href="https://seanmc114.github.io/Turbo-Ketchup/" target="_blank">
+        <h2>TURBO: KETCHUP 🎄</h2>
+        <p>Colours & characters with ser, estar & tener.</p>
+        <span class="progress-badge" id="ketchupProgress">Loading…</span>
+        <span class="play-chip">Play ➜</span>
       </a>
 
-      <!-- Open Day Game -->
-      <a class="game-card" href="https://seanmc114.github.io/Open-Day-Game/" target="_blank">
-        <h2>Open Day Game 🎈</h2>
-        <p>Fun taster game used on Synge Street Open Day.</p>
-        <p class="progress-badge" id="progress-open-day">
-          Progress: not tracked (yet)
-        </p>
-      </a>
+    </section>
 
-      <!-- Days & Subjects -->
-      <a class="game-card" href="https://seanmc114.github.io/Days-and-Subjects/" target="_blank">
-        <h2>Days & Subjects 📚</h2>
-        <p>Talk about your timetable: days and subjects.</p>
-        <p class="progress-badge" id="progress-days-subjects">
-          Progress: not tracked (yet)
-        </p>
-      </a>
+    <footer class="hub-footer">
+      Synge Street · 1st Year Spanish · Christmas Revision
+    </footer>
+  </main>
 
-      <!-- Turbo Daily (sample) -->
-      <a class="game-card" href="https://seanmc114.github.io/Turbo-Daily/" target="_blank">
-        <h2>Turbo Daily (sample) ⚡</h2>
-        <p>Sample daily Spanish drills for quick revision.</p>
-        <p class="pr
+  <script>
+    // Read Turbo Ketchup progress
+    document.addEventListener("DOMContentLoaded", () => {
+      const badge = document.getElementById("ketchupProgress");
+      let data = null;
+      try {
+        data = JSON.parse(localStorage.getItem("turbo_ketchup_progress"));
+      } catch {}
+
+      if (!data) {
+        badge.textContent = "Not started yet";
+        return;
+      }
+
+      const levels = data.levelsCompleted ?? 0;
+      const score = data.bestScore ?? 0;
+      const time = data.bestTime ? data.bestTime.toFixed(1) + "s" : "—";
+
+      badge.textContent = `Levels ${levels}/10 · Best ${score}% · ${time}`;
+    });
+  </script>
+
+</body>
+</html>
